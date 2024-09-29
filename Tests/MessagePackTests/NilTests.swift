@@ -1,30 +1,28 @@
 import Foundation
-import XCTest
 @testable import MessagePack
+import XCTest
 
 class NilTests: XCTestCase {
-    static var allTests = {
-        return [
-            ("testLiteralConversion", testLiteralConversion),
-            ("testPack", testPack),
-            ("testUnpack", testUnpack),
-        ]
-    }()
+  static var allTests = [
+    ("testLiteralConversion", testLiteralConversion),
+    ("testPack", testPack),
+    ("testUnpack", testUnpack),
+  ]
 
-    let packed = Data([0xc0])
+  let packed = Data([0xC0])
 
-    func testLiteralConversion() {
-        let implicitValue: MessagePackValue = nil
-        XCTAssertEqual(implicitValue, MessagePackValue.nil)
-    }
+  func testLiteralConversion() {
+    let implicitValue: MessagePackValue = nil
+    XCTAssertEqual(implicitValue, MessagePackValue.nil)
+  }
 
-    func testPack() {
-        XCTAssertEqual(pack(.nil), packed)
-    }
+  func testPack() {
+    XCTAssertEqual(pack(.nil), self.packed)
+  }
 
-    func testUnpack() {
-        let unpacked = try? unpack(packed)
-        XCTAssertEqual(unpacked?.value, MessagePackValue.nil)
-        XCTAssertEqual(unpacked?.remainder.count, 0)
-    }
+  func testUnpack() {
+    let unpacked = try? unpack(self.packed)
+    XCTAssertEqual(unpacked?.value, MessagePackValue.nil)
+    XCTAssertEqual(unpacked?.remainder.count, 0)
+  }
 }
