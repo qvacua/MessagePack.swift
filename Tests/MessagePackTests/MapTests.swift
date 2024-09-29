@@ -1,6 +1,6 @@
 import Foundation
 @testable import MessagePack
-import XCTest
+import Testing
 
 func map(_ count: Int) -> [MessagePackValue: MessagePackValue] {
   var dict = [MessagePackValue: MessagePackValue]()
@@ -23,7 +23,7 @@ func payload(_ count: Int) -> Data {
 func testPackMap(_ count: Int, prefix: Data) {
   let packed = pack(.map(map(count)))
 
-  XCTAssertEqual(packed.subdata(in: 0..<prefix.count), prefix)
+  #expect(packed.subdata(in: 0..<prefix.count) == prefix)
 
   var remainder = Subdata(data: packed, startIndex: prefix.count, endIndex: packed.count)
   var keys = Set<Int>()
@@ -33,47 +33,47 @@ func testPackMap(_ count: Int, prefix: Data) {
       (value, remainder) = try unpack(remainder)
       let key = Int(value.int64Value!)
 
-      XCTAssertFalse(keys.contains(key))
+      #expect(!keys.contains(key))
       keys.insert(key)
 
       let nilValue: MessagePackValue
       (nilValue, remainder) = try unpack(remainder)
-      XCTAssertEqual(nilValue, MessagePackValue.nil)
+      #expect(nilValue == MessagePackValue.nil)
     }
   } catch {
     print(error)
-    XCTFail()
+    Issue.record(error)
   }
 
-  XCTAssertEqual(keys.count, count)
+  #expect(keys.count == count)
 }
 
-class MapTests: XCTestCase {
-  func testLiteralConversion() {
+struct MapTests {
+  @Test func testLiteralConversion() {
     let implicitValue: MessagePackValue = ["c": "cookie"]
-    XCTAssertEqual(implicitValue, MessagePackValue.map([.string("c"): .string("cookie")]))
+    #expect(implicitValue == MessagePackValue.map([.string("c"): .string("cookie")]))
   }
 
-  func testPackFixmap() {
+  @Test func testPackFixmap() {
     let packed = Data([0x81, 0xA1, 0x63, 0xA6, 0x63, 0x6F, 0x6F, 0x6B, 0x69, 0x65])
-    XCTAssertEqual(pack(.map([.string("c"): .string("cookie")])), packed)
+    #expect(pack(.map([.string("c"): .string("cookie")])) == packed)
   }
 
-  func testUnpackFixmap() {
+  @Test func testUnpackFixmap() {
     let packed = Data([0x81, 0xA1, 0x63, 0xA6, 0x63, 0x6F, 0x6F, 0x6B, 0x69, 0x65])
 
     let unpacked = try? unpack(packed)
-    XCTAssertEqual(unpacked?.value, MessagePackValue.map([.string("c"): .string("cookie")]))
-    XCTAssertEqual(unpacked?.remainder.count, 0)
+    #expect(unpacked?.value == MessagePackValue.map([.string("c"): .string("cookie")]))
+    #expect(unpacked?.remainder.count == 0)
   }
 
-  func testPackMap16() {
+  @Test func testPackMap16() {
     testPackMap(16, prefix: Data([0xDE, 0x00, 0x10]))
   }
 
-  func testUnpackMap16() {
+  @Test func testUnpackMap16() {
     let unpacked = try? unpack(Data([0xDE, 0x00, 0x10]) + payload(16))
-    XCTAssertEqual(unpacked?.value, MessagePackValue.map(map(16)))
-    XCTAssertEqual(unpacked?.remainder.count, 0)
+    #expect(unpacked?.value == MessagePackValue.map(map(16)))
+    #expect(unpacked?.remainder.count == 0)
   }
 }

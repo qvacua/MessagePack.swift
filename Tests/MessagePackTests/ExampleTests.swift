@@ -1,8 +1,8 @@
 import Foundation
 @testable import MessagePack
-import XCTest
+import Testing
 
-class ExampleTests: XCTestCase {
+struct ExampleTests {
   let example: MessagePackValue = ["compact": true, "schema": 0]
 
   // Two possible "correct" values because dictionaries are unordered
@@ -47,38 +47,38 @@ class ExampleTests: XCTestCase {
     0xC3,
   ])
 
-  func testPack() {
+  @Test func testPack() {
     let packed = pack(example)
-    XCTAssertTrue(packed == self.correctA || packed == self.correctB)
+    #expect(packed == self.correctA || packed == self.correctB)
   }
 
-  func testUnpack() {
+  @Test func testUnpack() {
     let unpacked1 = try? unpack(self.correctA)
-    XCTAssertEqual(unpacked1?.value, self.example)
-    XCTAssertEqual(unpacked1?.remainder.count, 0)
+    #expect(unpacked1?.value == self.example)
+    #expect(unpacked1?.remainder.count == 0)
 
     let unpacked2 = try? unpack(self.correctB)
-    XCTAssertEqual(unpacked2?.value, self.example)
-    XCTAssertEqual(unpacked2?.remainder.count, 0)
+    #expect(unpacked2?.value == self.example)
+    #expect(unpacked2?.remainder.count == 0)
   }
 
-  func testUnpackInvalidData() {
+  @Test func testUnpackInvalidData() {
     do {
       _ = try unpack(Data([0xC1]))
-      XCTFail("Expected unpack to throw")
+      Issue.record("Expected unpack to throw")
     } catch {
-      XCTAssertEqual(error as? MessagePackError, .invalidData)
+      #expect(error as? MessagePackError == .invalidData)
     }
   }
 
-  func testUnpackInsufficientData() {
+  @Test func testUnpackInsufficientData() {
     do {
       var data = self.correctA
       data.removeLast()
       _ = try unpack(data)
-      XCTFail("Expected unpack to throw")
+      Issue.record("Expected unpack to throw")
     } catch {
-      XCTAssertEqual(error as? MessagePackError, .insufficientData)
+      #expect(error as? MessagePackError == .insufficientData)
     }
   }
 }

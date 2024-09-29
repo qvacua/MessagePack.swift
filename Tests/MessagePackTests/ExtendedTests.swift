@@ -1,63 +1,63 @@
 import Foundation
 @testable import MessagePack
-import XCTest
+import Testing
 
-class ExtendedTests: XCTestCase {
-  func testPackFixext1() {
+struct ExtendedTests {
+  @Test func testPackFixext1() {
     let value = MessagePackValue.extended(5, Data([0x00]))
     let packed = Data([0xD4, 0x05, 0x00])
-    XCTAssertEqual(pack(value), packed)
+    #expect(pack(value) == packed)
   }
 
-  func testUnpackFixext1() {
+  @Test func testUnpackFixext1() {
     let packed = Data([0xD4, 0x05, 0x00])
     let value = MessagePackValue.extended(5, Data([0x00]))
 
     let unpacked = try? unpack(packed)
-    XCTAssertEqual(unpacked?.value, value)
-    XCTAssertEqual(unpacked?.remainder.count, 0)
+    #expect(unpacked?.value == value)
+    #expect(unpacked?.remainder.count == 0)
   }
 
-  func testPackFixext2() {
+  @Test func testPackFixext2() {
     let value = MessagePackValue.extended(5, Data([0x00, 0x01]))
     let packed = Data([0xD5, 0x05, 0x00, 0x01])
-    XCTAssertEqual(pack(value), packed)
+    #expect(pack(value) == packed)
   }
 
-  func testUnpackFixext2() {
+  @Test func testUnpackFixext2() {
     let packed = Data([0xD5, 0x05, 0x00, 0x01])
     let value = MessagePackValue.extended(5, Data([0x00, 0x01]))
 
     let unpacked = try? unpack(packed)
-    XCTAssertEqual(unpacked?.value, value)
-    XCTAssertEqual(unpacked?.remainder.count, 0)
+    #expect(unpacked?.value == value)
+    #expect(unpacked?.remainder.count == 0)
   }
 
-  func testPackFixext4() {
+  @Test func testPackFixext4() {
     let value = MessagePackValue.extended(5, Data([0x00, 0x01, 0x02, 0x03]))
     let packed = Data([0xD6, 0x05, 0x00, 0x01, 0x02, 0x03])
-    XCTAssertEqual(pack(value), packed)
+    #expect(pack(value) == packed)
   }
 
-  func testUnpackFixext4() {
+  @Test func testUnpackFixext4() {
     let packed = Data([0xD6, 0x05, 0x00, 0x01, 0x02, 0x03])
     let value = MessagePackValue.extended(5, Data([0x00, 0x01, 0x02, 0x03]))
 
     let unpacked = try? unpack(packed)
-    XCTAssertEqual(unpacked?.value, value)
-    XCTAssertEqual(unpacked?.remainder.count, 0)
+    #expect(unpacked?.value == value)
+    #expect(unpacked?.remainder.count == 0)
   }
 
-  func testPackFixext8() {
+  @Test func testPackFixext8() {
     let value = MessagePackValue.extended(
       5,
       Data([0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07])
     )
     let packed = Data([0xD7, 0x05, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07])
-    XCTAssertEqual(pack(value), packed)
+    #expect(pack(value) == packed)
   }
 
-  func testUnpackFixext8() {
+  @Test func testUnpackFixext8() {
     let packed = Data([0xD7, 0x05, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07])
     let value = MessagePackValue.extended(
       5,
@@ -65,11 +65,11 @@ class ExtendedTests: XCTestCase {
     )
 
     let unpacked = try? unpack(packed)
-    XCTAssertEqual(unpacked?.value, value)
-    XCTAssertEqual(unpacked?.remainder.count, 0)
+    #expect(unpacked?.value == value)
+    #expect(unpacked?.remainder.count == 0)
   }
 
-  func testPackFixext16() {
+  @Test func testPackFixext16() {
     let value = MessagePackValue.extended(
       5,
       Data([
@@ -111,10 +111,10 @@ class ExtendedTests: XCTestCase {
       0x0E,
       0x0F,
     ])
-    XCTAssertEqual(pack(value), packed)
+    #expect(pack(value) == packed)
   }
 
-  func testUnpackFixext16() {
+  @Test func testUnpackFixext16() {
     let value = MessagePackValue.extended(
       5,
       Data([
@@ -158,56 +158,56 @@ class ExtendedTests: XCTestCase {
     ])
 
     let unpacked = try? unpack(packed)
-    XCTAssertEqual(unpacked?.value, value)
-    XCTAssertEqual(unpacked?.remainder.count, 0)
+    #expect(unpacked?.value == value)
+    #expect(unpacked?.remainder.count == 0)
   }
 
-  func testPackExt8() {
+  @Test func testPackExt8() {
     let payload = Data(count: 7)
     let value = MessagePackValue.extended(5, payload)
-    XCTAssertEqual(pack(value), Data([0xC7, 0x07, 0x05]) + payload)
+    #expect(pack(value) == Data([0xC7, 0x07, 0x05]) + payload)
   }
 
-  func testUnpackExt8() {
+  @Test func testUnpackExt8() {
     let payload = Data(count: 7)
     let value = MessagePackValue.extended(5, payload)
 
     let unpacked = try? unpack(Data([0xC7, 0x07, 0x05]) + payload)
-    XCTAssertEqual(unpacked?.value, value)
-    XCTAssertEqual(unpacked?.remainder.count, 0)
+    #expect(unpacked?.value == value)
+    #expect(unpacked?.remainder.count == 0)
   }
 
-  func testPackExt16() {
+  @Test func testPackExt16() {
     let payload = Data(count: 0x100)
     let value = MessagePackValue.extended(5, payload)
-    XCTAssertEqual(pack(value), Data([0xC8, 0x01, 0x00, 0x05]) + payload)
+    #expect(pack(value) == Data([0xC8, 0x01, 0x00, 0x05]) + payload)
   }
 
-  func testUnpackExt16() {
+  @Test func testUnpackExt16() {
     let payload = Data(count: 0x100)
     let value = MessagePackValue.extended(5, payload)
 
     let unpacked = try? unpack(Data([0xC8, 0x01, 0x00, 0x05]) + payload)
-    XCTAssertEqual(unpacked?.value, value)
-    XCTAssertEqual(unpacked?.remainder.count, 0)
+    #expect(unpacked?.value == value)
+    #expect(unpacked?.remainder.count == 0)
   }
 
-  func testPackExt32() {
+  @Test func testPackExt32() {
     let payload = Data(count: 0x10000)
     let value = MessagePackValue.extended(5, payload)
-    XCTAssertEqual(pack(value), Data([0xC9, 0x00, 0x01, 0x00, 0x00, 0x05]) + payload)
+    #expect(pack(value) == Data([0xC9, 0x00, 0x01, 0x00, 0x00, 0x05]) + payload)
   }
 
-  func testUnpackExt32() {
+  @Test func testUnpackExt32() {
     let payload = Data(count: 0x10000)
     let value = MessagePackValue.extended(5, payload)
 
     let unpacked = try? unpack(Data([0xC9, 0x00, 0x01, 0x00, 0x00, 0x05]) + payload)
-    XCTAssertEqual(unpacked?.value, value)
-    XCTAssertEqual(unpacked?.remainder.count, 0)
+    #expect(unpacked?.value == value)
+    #expect(unpacked?.remainder.count == 0)
   }
 
-  func testUnpackInsufficientData() {
+  @Test func testUnpackInsufficientData() {
     let dataArray: [Data] = [
       // fixent
       Data([0xD4]), Data([0xD5]), Data([0xD6]), Data([0xD7]), Data([0xD8]),
@@ -219,9 +219,9 @@ class ExtendedTests: XCTestCase {
     for data in dataArray {
       do {
         _ = try unpack(data)
-        XCTFail("Expected unpack to throw")
+        Issue.record("Expected unpack to throw")
       } catch {
-        XCTAssertEqual(error as? MessagePackError, .insufficientData)
+        #expect(error as? MessagePackError == .insufficientData)
       }
     }
   }

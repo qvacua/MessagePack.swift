@@ -1,139 +1,139 @@
 import Foundation
 @testable import MessagePack
-import XCTest
+import Testing
 
-class IntegerTests: XCTestCase {
-  func testPosLiteralConversion() {
+struct IntegerTests {
+  @Test func testPosLiteralConversion() {
     let implicitValue: MessagePackValue = -1
-    XCTAssertEqual(implicitValue, MessagePackValue.int(-1))
+    #expect(implicitValue == MessagePackValue.int(-1))
   }
 
-  func testNegLiteralConversion() {
+  @Test func testNegLiteralConversion() {
     let implicitValue: MessagePackValue = 42
-    XCTAssertEqual(implicitValue, MessagePackValue.uint(42))
+    #expect(implicitValue == MessagePackValue.uint(42))
   }
 
-  func testPackNegFixint() {
-    XCTAssertEqual(pack(.int(-1)), Data([0xFF]))
+  @Test func testPackNegFixint() {
+    #expect(pack(.int(-1)) == Data([0xFF]))
   }
 
-  func testUnpackNegFixint() {
+  @Test func testUnpackNegFixint() {
     let unpacked1 = try? unpack(Data([0xFF]))
-    XCTAssertEqual(unpacked1?.value, .int(-1))
-    XCTAssertEqual(unpacked1?.remainder.count, 0)
+    #expect(unpacked1?.value == .int(-1))
+    #expect(unpacked1?.remainder.count == 0)
 
     let unpacked2 = try? unpack(Data([0xE0]))
-    XCTAssertEqual(unpacked2?.value, .int(-32))
-    XCTAssertEqual(unpacked2?.remainder.count, 0)
+    #expect(unpacked2?.value == .int(-32))
+    #expect(unpacked2?.remainder.count == 0)
   }
 
-  func testPackPosFixintSigned() {
-    XCTAssertEqual(pack(.int(1)), Data([0x01]))
+  @Test func testPackPosFixintSigned() {
+    #expect(pack(.int(1)) == Data([0x01]))
   }
 
-  func testUnpackPosFixintSigned() {
+  @Test func testUnpackPosFixintSigned() {
     let unpacked = try? unpack(Data([0x01]))
-    XCTAssertEqual(unpacked?.value, .int(1))
-    XCTAssertEqual(unpacked?.remainder.count, 0)
+    #expect(unpacked?.value == .int(1))
+    #expect(unpacked?.remainder.count == 0)
   }
 
-  func testPackPosFixintUnsigned() {
-    XCTAssertEqual(pack(.uint(42)), Data([0x2A]))
+  @Test func testPackPosFixintUnsigned() {
+    #expect(pack(.uint(42)) == Data([0x2A]))
   }
 
-  func testUnpackPosFixintUnsigned() {
+  @Test func testUnpackPosFixintUnsigned() {
     let unpacked = try? unpack(Data([0x2A]))
-    XCTAssertEqual(unpacked?.value, .uint(42))
-    XCTAssertEqual(unpacked?.remainder.count, 0)
+    #expect(unpacked?.value == .uint(42))
+    #expect(unpacked?.remainder.count == 0)
   }
 
-  func testPackUInt8() {
-    XCTAssertEqual(pack(.uint(0xFF)), Data([0xCC, 0xFF]))
+  @Test func testPackUInt8() {
+    #expect(pack(.uint(0xFF)) == Data([0xCC, 0xFF]))
   }
 
-  func testUnpackUInt8() {
+  @Test func testUnpackUInt8() {
     let unpacked = try? unpack(Data([0xCC, 0xFF]))
-    XCTAssertEqual(unpacked?.value, .uint(0xFF))
-    XCTAssertEqual(unpacked?.remainder.count, 0)
+    #expect(unpacked?.value == .uint(0xFF))
+    #expect(unpacked?.remainder.count == 0)
   }
 
-  func testPackUInt16() {
-    XCTAssertEqual(pack(.uint(0xFFFF)), Data([0xCD, 0xFF, 0xFF]))
+  @Test func testPackUInt16() {
+    #expect(pack(.uint(0xFFFF)) == Data([0xCD, 0xFF, 0xFF]))
   }
 
-  func testUnpackUInt16() {
+  @Test func testUnpackUInt16() {
     let unpacked = try? unpack(Data([0xCD, 0xFF, 0xFF]))
-    XCTAssertEqual(unpacked?.value, .uint(0xFFFF))
-    XCTAssertEqual(unpacked?.remainder.count, 0)
+    #expect(unpacked?.value == .uint(0xFFFF))
+    #expect(unpacked?.remainder.count == 0)
   }
 
-  func testPackUInt32() {
-    XCTAssertEqual(pack(.uint(0xFFFF_FFFF)), Data([0xCE, 0xFF, 0xFF, 0xFF, 0xFF]))
+  @Test func testPackUInt32() {
+    #expect(pack(.uint(0xFFFF_FFFF)) == Data([0xCE, 0xFF, 0xFF, 0xFF, 0xFF]))
   }
 
-  func testUnpackUInt32() {
+  @Test func testUnpackUInt32() {
     let unpacked = try? unpack(Data([0xCE, 0xFF, 0xFF, 0xFF, 0xFF]))
-    XCTAssertEqual(unpacked?.value, .uint(0xFFFF_FFFF))
-    XCTAssertEqual(unpacked?.remainder.count, 0)
+    #expect(unpacked?.value == .uint(0xFFFF_FFFF))
+    #expect(unpacked?.remainder.count == 0)
   }
 
-  func testPackUInt64() {
-    XCTAssertEqual(
-      pack(.uint(0xFFFF_FFFF_FFFF_FFFF)),
+  @Test func testPackUInt64() {
+    #expect(
+      pack(.uint(0xFFFF_FFFF_FFFF_FFFF)) ==
       Data([0xCF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF])
     )
   }
 
-  func testUnpackUInt64() {
+  @Test func testUnpackUInt64() {
     let unpacked = try? unpack(Data([0xCF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF]))
-    XCTAssertEqual(unpacked?.value, .uint(0xFFFF_FFFF_FFFF_FFFF))
-    XCTAssertEqual(unpacked?.remainder.count, 0)
+    #expect(unpacked?.value == .uint(0xFFFF_FFFF_FFFF_FFFF))
+    #expect(unpacked?.remainder.count == 0)
   }
 
-  func testPackInt8() {
-    XCTAssertEqual(pack(.int(-0x7F)), Data([0xD0, 0x81]))
+  @Test func testPackInt8() {
+    #expect(pack(.int(-0x7F)) == Data([0xD0, 0x81]))
   }
 
-  func testUnpackInt8() {
+  @Test func testUnpackInt8() {
     let unpacked = try? unpack(Data([0xD0, 0x81]))
-    XCTAssertEqual(unpacked?.value, .int(-0x7F))
-    XCTAssertEqual(unpacked?.remainder.count, 0)
+    #expect(unpacked?.value == .int(-0x7F))
+    #expect(unpacked?.remainder.count == 0)
   }
 
-  func testPackInt16() {
-    XCTAssertEqual(pack(.int(-0x7FFF)), Data([0xD1, 0x80, 0x01]))
+  @Test func testPackInt16() {
+    #expect(pack(.int(-0x7FFF)) == Data([0xD1, 0x80, 0x01]))
   }
 
-  func testUnpackInt16() {
+  @Test func testUnpackInt16() {
     let unpacked = try? unpack(Data([0xD1, 0x80, 0x01]))
-    XCTAssertEqual(unpacked?.value, .int(-0x7FFF))
-    XCTAssertEqual(unpacked?.remainder.count, 0)
+    #expect(unpacked?.value == .int(-0x7FFF))
+    #expect(unpacked?.remainder.count == 0)
   }
 
-  func testPackInt32() {
-    XCTAssertEqual(pack(.int(-0x10000)), Data([0xD2, 0xFF, 0xFF, 0x00, 0x00]))
+  @Test func testPackInt32() {
+    #expect(pack(.int(-0x10000)) == Data([0xD2, 0xFF, 0xFF, 0x00, 0x00]))
   }
 
-  func testUnpackInt32() {
+  @Test func testUnpackInt32() {
     let unpacked = try? unpack(Data([0xD2, 0xFF, 0xFF, 0x00, 0x00]))
-    XCTAssertEqual(unpacked?.value, .int(-0x10000))
-    XCTAssertEqual(unpacked?.remainder.count, 0)
+    #expect(unpacked?.value == .int(-0x10000))
+    #expect(unpacked?.remainder.count == 0)
   }
 
-  func testPackInt64() {
-    XCTAssertEqual(
-      pack(.int(-0x1_0000_0000)),
+  @Test func testPackInt64() {
+    #expect(
+      pack(.int(-0x1_0000_0000)) ==
       Data([0xD3, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00])
     )
   }
 
-  func testUnpackInt64() {
+  @Test func testUnpackInt64() {
     let unpacked = try? unpack(Data([0xD3, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00]))
-    XCTAssertEqual(unpacked?.value, .int(-0x1_0000_0000))
-    XCTAssertEqual(unpacked?.remainder.count, 0)
+    #expect(unpacked?.value == .int(-0x1_0000_0000))
+    #expect(unpacked?.remainder.count == 0)
   }
 
-  func testUnpackInsufficientData() {
+  @Test func testUnpackInsufficientData() {
     let dataArray: [Data] = [
       Data([0xD0]),
       Data([0xD1]),
@@ -144,9 +144,9 @@ class IntegerTests: XCTestCase {
     for data in dataArray {
       do {
         _ = try unpack(data)
-        XCTFail("Expected unpack to throw")
+        Issue.record("Expected unpack to throw")
       } catch {
-        XCTAssertEqual(error as? MessagePackError, .insufficientData)
+        #expect(error as? MessagePackError == .insufficientData)
       }
     }
   }

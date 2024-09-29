@@ -1,66 +1,66 @@
 import Foundation
 @testable import MessagePack
-import XCTest
+import Testing
 
-class DescriptionTests: XCTestCase {
-  func testNilDescription() {
-    XCTAssertEqual(MessagePackValue.nil.description, "nil")
+struct DescriptionTests {
+  @Test func testNilDescription() {
+    #expect(MessagePackValue.nil.description == "nil")
   }
 
-  func testBoolDescription() {
-    XCTAssertEqual(MessagePackValue.bool(true).description, "bool(true)")
-    XCTAssertEqual(MessagePackValue.bool(false).description, "bool(false)")
+  @Test func testBoolDescription() {
+    #expect(MessagePackValue.bool(true).description == "bool(true)")
+    #expect(MessagePackValue.bool(false).description == "bool(false)")
   }
 
-  func testIntDescription() {
-    XCTAssertEqual(MessagePackValue.int(-1).description, "int(-1)")
-    XCTAssertEqual(MessagePackValue.int(0).description, "int(0)")
-    XCTAssertEqual(MessagePackValue.int(1).description, "int(1)")
+  @Test func testIntDescription() {
+    #expect(MessagePackValue.int(-1).description == "int(-1)")
+    #expect(MessagePackValue.int(0).description == "int(0)")
+    #expect(MessagePackValue.int(1).description == "int(1)")
   }
 
-  func testUIntDescription() {
-    XCTAssertEqual(MessagePackValue.uint(0).description, "uint(0)")
-    XCTAssertEqual(MessagePackValue.uint(1).description, "uint(1)")
-    XCTAssertEqual(MessagePackValue.uint(2).description, "uint(2)")
+  @Test func testUIntDescription() {
+    #expect(MessagePackValue.uint(0).description == "uint(0)")
+    #expect(MessagePackValue.uint(1).description == "uint(1)")
+    #expect(MessagePackValue.uint(2).description == "uint(2)")
   }
 
-  func testFloatDescription() {
-    XCTAssertEqual(MessagePackValue.float(0.0).description, "float(0.0)")
-    XCTAssertEqual(MessagePackValue.float(1.618).description, "float(1.618)")
-    XCTAssertEqual(MessagePackValue.float(3.14).description, "float(3.14)")
+  @Test func testFloatDescription() {
+    #expect(MessagePackValue.float(0.0).description == "float(0.0)")
+    #expect(MessagePackValue.float(1.618).description == "float(1.618)")
+    #expect(MessagePackValue.float(3.14).description == "float(3.14)")
   }
 
-  func testDoubleDescription() {
-    XCTAssertEqual(MessagePackValue.double(0.0).description, "double(0.0)")
-    XCTAssertEqual(MessagePackValue.double(1.618).description, "double(1.618)")
-    XCTAssertEqual(MessagePackValue.double(3.14).description, "double(3.14)")
+  @Test func testDoubleDescription() {
+    #expect(MessagePackValue.double(0.0).description == "double(0.0)")
+    #expect(MessagePackValue.double(1.618).description == "double(1.618)")
+    #expect(MessagePackValue.double(3.14).description == "double(3.14)")
   }
 
-  func testStringDescription() {
-    XCTAssertEqual(MessagePackValue.string("").description, "string()".description)
-    XCTAssertEqual(
-      MessagePackValue.string("MessagePack").description,
+  @Test func testStringDescription() {
+    #expect(MessagePackValue.string("").description == "string()".description)
+    #expect(
+      MessagePackValue.string("MessagePack").description ==
       "string(MessagePack)".description
     )
   }
 
-  func testBinaryDescription() {
-    XCTAssertEqual(MessagePackValue.binary(Data()).description, "data(0 bytes)")
-    XCTAssertEqual(
-      MessagePackValue.binary(Data(Data([0x00, 0x01, 0x02, 0x03, 0x04]))).description,
+  @Test func testBinaryDescription() {
+    #expect(MessagePackValue.binary(Data()).description == "data(0 bytes)")
+    #expect(
+      MessagePackValue.binary(Data(Data([0x00, 0x01, 0x02, 0x03, 0x04]))).description ==
       "data(5 bytes)"
     )
   }
 
-  func testArrayDescription() {
+  @Test func testArrayDescription() {
     let values: [MessagePackValue] = [1, true, ""]
-    XCTAssertEqual(
-      MessagePackValue.array(values).description,
+    #expect(
+      MessagePackValue.array(values).description ==
       "array([int(1), bool(true), string()])"
     )
   }
 
-  func testMapDescription() {
+  @Test func testMapDescription() {
     let values: [MessagePackValue: MessagePackValue] = [
       "a": "apple",
       "b": "banana",
@@ -94,13 +94,13 @@ class DescriptionTests: XCTestCase {
       }
     }
 
-    XCTAssertTrue(isValid)
+    #expect(isValid)
   }
 
-  func testExtendedDescription() {
-    XCTAssertEqual(MessagePackValue.extended(5, Data()).description, "extended(5, 0 bytes)")
-    XCTAssertEqual(
-      MessagePackValue.extended(5, Data([0x00, 0x10, 0x20, 0x30, 0x40])).description,
+  @Test func testExtendedDescription() {
+    #expect(MessagePackValue.extended(5, Data()).description == "extended(5, 0 bytes)")
+    #expect(
+      MessagePackValue.extended(5, Data([0x00, 0x10, 0x20, 0x30, 0x40])).description ==
       "extended(5, 5 bytes)"
     )
   }

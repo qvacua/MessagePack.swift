@@ -1,72 +1,72 @@
 import Foundation
 @testable import MessagePack
-import XCTest
+import Testing
 
-class HashValueTests: XCTestCase {
-  func testNilHashValue() {
-    XCTAssertEqual(MessagePackValue.nil.hashValue, 0)
+struct HashValueTests {
+  @Test func testNilHashValue() {
+    #expect(MessagePackValue.nil.hashValue == 0)
   }
 
-  func testBoolHashValue() {
-    XCTAssertEqual(MessagePackValue.bool(true).hashValue, true.hashValue)
-    XCTAssertEqual(MessagePackValue.bool(false).hashValue, false.hashValue)
+  @Test func testBoolHashValue() {
+    #expect(MessagePackValue.bool(true).hashValue == true.hashValue)
+    #expect(MessagePackValue.bool(false).hashValue == false.hashValue)
   }
 
-  func testIntHashValue() {
-    XCTAssertEqual(MessagePackValue.int(-1).hashValue, Int64(-1).hashValue)
-    XCTAssertEqual(MessagePackValue.int(0).hashValue, Int64(0).hashValue)
-    XCTAssertEqual(MessagePackValue.int(1).hashValue, Int64(1).hashValue)
+  @Test func testIntHashValue() {
+    #expect(MessagePackValue.int(-1).hashValue == Int64(-1).hashValue)
+    #expect(MessagePackValue.int(0).hashValue == Int64(0).hashValue)
+    #expect(MessagePackValue.int(1).hashValue == Int64(1).hashValue)
   }
 
-  func testUIntHashValue() {
-    XCTAssertEqual(MessagePackValue.uint(0).hashValue, UInt64(0).hashValue)
-    XCTAssertEqual(MessagePackValue.uint(1).hashValue, UInt64(1).hashValue)
-    XCTAssertEqual(MessagePackValue.uint(2).hashValue, UInt64(2).hashValue)
+  @Test func testUIntHashValue() {
+    #expect(MessagePackValue.uint(0).hashValue == UInt64(0).hashValue)
+    #expect(MessagePackValue.uint(1).hashValue == UInt64(1).hashValue)
+    #expect(MessagePackValue.uint(2).hashValue == UInt64(2).hashValue)
   }
 
-  func testFloatHashValue() {
-    XCTAssertEqual(MessagePackValue.float(0).hashValue, Float(0).hashValue)
-    XCTAssertEqual(MessagePackValue.float(1.618).hashValue, Float(1.618).hashValue)
-    XCTAssertEqual(MessagePackValue.float(3.14).hashValue, Float(3.14).hashValue)
+  @Test func testFloatHashValue() {
+    #expect(MessagePackValue.float(0).hashValue == Float(0).hashValue)
+    #expect(MessagePackValue.float(1.618).hashValue == Float(1.618).hashValue)
+    #expect(MessagePackValue.float(3.14).hashValue == Float(3.14).hashValue)
   }
 
-  func testDoubleHashValue() {
-    XCTAssertEqual(MessagePackValue.double(0).hashValue, Double(0).hashValue)
-    XCTAssertEqual(MessagePackValue.double(1.618).hashValue, Double(1.618).hashValue)
-    XCTAssertEqual(MessagePackValue.double(3.14).hashValue, Double(3.14).hashValue)
+  @Test func testDoubleHashValue() {
+    #expect(MessagePackValue.double(0).hashValue == Double(0).hashValue)
+    #expect(MessagePackValue.double(1.618).hashValue == Double(1.618).hashValue)
+    #expect(MessagePackValue.double(3.14).hashValue == Double(3.14).hashValue)
   }
 
-  func testStringHashValue() {
-    XCTAssertEqual(MessagePackValue.string("").hashValue, "".hashValue)
-    XCTAssertEqual(MessagePackValue.string("MessagePack").hashValue, "MessagePack".hashValue)
+  @Test func testStringHashValue() {
+    #expect(MessagePackValue.string("").hashValue == "".hashValue)
+    #expect(MessagePackValue.string("MessagePack").hashValue == "MessagePack".hashValue)
   }
 
-  func testBinaryHashValue() {
-    XCTAssertEqual(MessagePackValue.binary(Data()).hashValue, 0)
-    XCTAssertEqual(MessagePackValue.binary(Data([0x00, 0x01, 0x02, 0x03, 0x04])).hashValue, 5)
+  @Test func testBinaryHashValue() {
+    #expect(MessagePackValue.binary(Data()).hashValue == 0)
+    #expect(MessagePackValue.binary(Data([0x00, 0x01, 0x02, 0x03, 0x04])).hashValue == 5)
   }
 
-  func testArrayHashValue() {
+  @Test func testArrayHashValue() {
     let values: [MessagePackValue] = [1, true, ""]
-    XCTAssertEqual(MessagePackValue.array(values).hashValue, 3)
+    #expect(MessagePackValue.array(values).hashValue == 3)
   }
 
-  func testMapHashValue() {
+  @Test func testMapHashValue() {
     let values: [MessagePackValue: MessagePackValue] = [
       "a": "apple",
       "b": "banana",
       "c": "cookie",
     ]
-    XCTAssertEqual(MessagePackValue.map(values).hashValue, 3)
+    #expect(MessagePackValue.map(values).hashValue == 3)
   }
 
-  func testExtendedHashValue() {
-    XCTAssertEqual(
-      MessagePackValue.extended(5, Data()).hashValue,
+  @Test func testExtendedHashValue() {
+    #expect(
+      MessagePackValue.extended(5, Data()).hashValue ==
       31 &* Int8(5).hashValue &+ Int(0)
     )
-    XCTAssertEqual(
-      MessagePackValue.extended(5, Data([0x00, 0x01, 0x02, 0x03, 0x04])).hashValue,
+    #expect(
+      MessagePackValue.extended(5, Data([0x00, 0x01, 0x02, 0x03, 0x04])).hashValue ==
       31 &* Int8(5).hashValue &+ Int(5)
     )
   }

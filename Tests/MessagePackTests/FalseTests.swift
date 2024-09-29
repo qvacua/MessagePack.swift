@@ -1,22 +1,22 @@
 import Foundation
 @testable import MessagePack
-import XCTest
+import Testing
 
-class FalseTests: XCTestCase {
+struct FalseTests {
   let packed = Data([0xC2])
 
-  func testLiteralConversion() {
+  @Test func testLiteralConversion() {
     let implicitValue: MessagePackValue = false
-    XCTAssertEqual(implicitValue, MessagePackValue.bool(false))
+    #expect(implicitValue == MessagePackValue.bool(false))
   }
 
-  func testPack() {
-    XCTAssertEqual(pack(.bool(false)), self.packed)
+  @Test func testPack() {
+    #expect(pack(.bool(false)) == self.packed)
   }
 
-  func testUnpack() {
+  @Test func testUnpack() {
     let unpacked = try? unpack(self.packed)
-    XCTAssertEqual(unpacked?.value, .bool(false))
-    XCTAssertEqual(unpacked?.remainder.count, 0)
+    #expect(unpacked?.value == .bool(false))
+    #expect(unpacked?.remainder.count == 0)
   }
 }

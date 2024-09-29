@@ -10,6 +10,9 @@ let package = Package(
       targets: ["MessagePack"]
     ),
   ],
+  dependencies: [
+    .package(url: "https://github.com/apple/swift-numerics", from: "1.0.2"),
+  ],
   targets: [
     .target(
       name: "MessagePack",
@@ -17,7 +20,10 @@ let package = Package(
     ),
     .testTarget(
       name: "MessagePackTests",
-      dependencies: ["MessagePack"]
+      dependencies: [
+        "MessagePack",
+        .product(name: "Numerics", package: "swift-numerics"),
+      ]
     ),
   ]
 )

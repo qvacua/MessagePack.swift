@@ -1,94 +1,94 @@
 import Foundation
 @testable import MessagePack
-import XCTest
+import Testing
 
-class EqualityTests: XCTestCase {
-  func testNilEqualToNil() {
-    XCTAssertEqual(MessagePackValue.nil, MessagePackValue.nil)
+struct EqualityTests {
+  @Test func testNilEqualToNil() {
+    #expect(MessagePackValue.nil == MessagePackValue.nil)
   }
 
-  func testNilNotEqualToBool() {
-    XCTAssertNotEqual(MessagePackValue.nil, MessagePackValue.bool(false))
+  @Test func testNilNotEqualToBool() {
+    #expect(MessagePackValue.nil != MessagePackValue.bool(false))
   }
 
-  func testBoolEqualToBool() {
-    XCTAssertEqual(MessagePackValue.bool(true), MessagePackValue.bool(true))
-    XCTAssertEqual(MessagePackValue.bool(false), MessagePackValue.bool(false))
-    XCTAssertNotEqual(MessagePackValue.bool(true), MessagePackValue.bool(false))
-    XCTAssertNotEqual(MessagePackValue.bool(false), MessagePackValue.bool(true))
+  @Test func testBoolEqualToBool() {
+    #expect(MessagePackValue.bool(true) == MessagePackValue.bool(true))
+    #expect(MessagePackValue.bool(false) == MessagePackValue.bool(false))
+    #expect(MessagePackValue.bool(true) != MessagePackValue.bool(false))
+    #expect(MessagePackValue.bool(false) != MessagePackValue.bool(true))
   }
 
-  func testIntEqualToInt() {
-    XCTAssertEqual(MessagePackValue.int(1), MessagePackValue.int(1))
+  @Test func testIntEqualToInt() {
+    #expect(MessagePackValue.int(1) == MessagePackValue.int(1))
   }
 
-  func testUIntEqualToUInt() {
-    XCTAssertEqual(MessagePackValue.uint(1), MessagePackValue.uint(1))
+  @Test func testUIntEqualToUInt() {
+    #expect(MessagePackValue.uint(1) == MessagePackValue.uint(1))
   }
 
-  func testIntEqualToUInt() {
-    XCTAssertEqual(MessagePackValue.int(1), MessagePackValue.uint(1))
+  @Test func testIntEqualToUInt() {
+    #expect(MessagePackValue.int(1) == MessagePackValue.uint(1))
   }
 
-  func testUIntEqualToInt() {
-    XCTAssertEqual(MessagePackValue.uint(1), MessagePackValue.int(1))
+  @Test func testUIntEqualToInt() {
+    #expect(MessagePackValue.uint(1) == MessagePackValue.int(1))
   }
 
-  func testUIntNotEqualToInt() {
-    XCTAssertNotEqual(MessagePackValue.uint(1), MessagePackValue.int(-1))
+  @Test func testUIntNotEqualToInt() {
+    #expect(MessagePackValue.uint(1) != MessagePackValue.int(-1))
   }
 
-  func testIntNotEqualToUInt() {
-    XCTAssertNotEqual(MessagePackValue.int(-1), MessagePackValue.uint(1))
+  @Test func testIntNotEqualToUInt() {
+    #expect(MessagePackValue.int(-1) != MessagePackValue.uint(1))
   }
 
-  func testFloatEqualToFloat() {
-    XCTAssertEqual(MessagePackValue.float(3.14), MessagePackValue.float(3.14))
+  @Test func testFloatEqualToFloat() {
+    #expect(MessagePackValue.float(3.14) == MessagePackValue.float(3.14))
   }
 
-  func testDoubleEqualToDouble() {
-    XCTAssertEqual(MessagePackValue.double(3.14), MessagePackValue.double(3.14))
+  @Test func testDoubleEqualToDouble() {
+    #expect(MessagePackValue.double(3.14) == MessagePackValue.double(3.14))
   }
 
-  func testFloatNotEqualToDouble() {
-    XCTAssertNotEqual(MessagePackValue.float(3.14), MessagePackValue.double(3.14))
+  @Test func testFloatNotEqualToDouble() {
+    #expect(MessagePackValue.float(3.14) != MessagePackValue.double(3.14))
   }
 
-  func testDoubleNotEqualToFloat() {
-    XCTAssertNotEqual(MessagePackValue.double(3.14), MessagePackValue.float(3.14))
+  @Test func testDoubleNotEqualToFloat() {
+    #expect(MessagePackValue.double(3.14) != MessagePackValue.float(3.14))
   }
 
-  func testStringEqualToString() {
-    XCTAssertEqual(
-      MessagePackValue.string("Hello, world!"),
+  @Test func testStringEqualToString() {
+    #expect(
+      MessagePackValue.string("Hello, world!") ==
       MessagePackValue.string("Hello, world!")
     )
   }
 
-  func testBinaryEqualToBinary() {
-    XCTAssertEqual(
-      MessagePackValue.binary(Data([0x00, 0x01, 0x02, 0x03, 0x04])),
+  @Test func testBinaryEqualToBinary() {
+    #expect(
+      MessagePackValue.binary(Data([0x00, 0x01, 0x02, 0x03, 0x04])) ==
       MessagePackValue.binary(Data([0x00, 0x01, 0x02, 0x03, 0x04]))
     )
   }
 
-  func testArrayEqualToArray() {
-    XCTAssertEqual(
-      MessagePackValue.array([0, 1, 2, 3, 4]),
+  @Test func testArrayEqualToArray() {
+    #expect(
+      MessagePackValue.array([0, 1, 2, 3, 4]) ==
       MessagePackValue.array([0, 1, 2, 3, 4])
     )
   }
 
-  func testMapEqualToMap() {
-    XCTAssertEqual(
-      MessagePackValue.map(["a": "apple", "b": "banana", "c": "cookie"]),
+  @Test func testMapEqualToMap() {
+    #expect(
+      MessagePackValue.map(["a": "apple", "b": "banana", "c": "cookie"]) ==
       MessagePackValue.map(["b": "banana", "c": "cookie", "a": "apple"])
     )
   }
 
-  func testExtendedEqualToExtended() {
-    XCTAssertEqual(
-      MessagePackValue.extended(5, Data([0x00, 0x01, 0x02, 0x03, 0x04])),
+  @Test func testExtendedEqualToExtended() {
+    #expect(
+      MessagePackValue.extended(5, Data([0x00, 0x01, 0x02, 0x03, 0x04])) ==
       MessagePackValue.extended(5, Data([0x00, 0x01, 0x02, 0x03, 0x04]))
     )
   }
