@@ -3,20 +3,6 @@ import Foundation
 import XCTest
 
 class ConvenienceInitializersTests: XCTestCase {
-  static var allTests = [
-    ("testNil", testNil),
-    ("testBool", testBool),
-    ("testUInt", testUInt),
-    ("testInt", testInt),
-    ("testFloat", testFloat),
-    ("testDouble", testDouble),
-    ("testString", testString),
-    ("testArray", testArray),
-    ("testMap", testMap),
-    ("testBinary", testBinary),
-    ("testExtended", testExtended),
-  ]
-
   func testNil() {
     XCTAssertEqual(MessagePackValue(), MessagePackValue.nil)
   }

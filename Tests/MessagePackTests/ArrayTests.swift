@@ -3,14 +3,6 @@ import Foundation
 import XCTest
 
 class ArrayTests: XCTestCase {
-  static var allTests = [
-    ("testLiteralConversion", testLiteralConversion),
-    ("testPackFixarray", testPackFixarray),
-    ("testUnpackFixarray", testUnpackFixarray),
-    ("testPackArray16", testPackArray16),
-    ("testUnpackArray16", testUnpackArray16),
-  ]
-
   func testLiteralConversion() {
     let implicitValue: MessagePackValue = [0, 1, 2, 3, 4]
     let payload: [MessagePackValue] = [.uint(0), .uint(1), .uint(2), .uint(3), .uint(4)]

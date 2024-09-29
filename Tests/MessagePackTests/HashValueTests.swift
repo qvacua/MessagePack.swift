@@ -3,20 +3,6 @@ import Foundation
 import XCTest
 
 class HashValueTests: XCTestCase {
-  static var allTests = [
-    ("testNilHashValue", testNilHashValue),
-    ("testBoolHashValue", testBoolHashValue),
-    ("testIntHashValue", testIntHashValue),
-    ("testUIntHashValue", testUIntHashValue),
-    ("testFloatHashValue", testFloatHashValue),
-    ("testDoubleHashValue", testDoubleHashValue),
-    ("testStringHashValue", testStringHashValue),
-    ("testBinaryHashValue", testBinaryHashValue),
-    ("testArrayHashValue", testArrayHashValue),
-    ("testMapHashValue", testMapHashValue),
-    ("testExtendedHashValue", testExtendedHashValue),
-  ]
-
   func testNilHashValue() {
     XCTAssertEqual(MessagePackValue.nil.hashValue, 0)
   }

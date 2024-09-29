@@ -3,33 +3,6 @@ import Foundation
 import XCTest
 
 class ConveniencePropertiesTests: XCTestCase {
-  static var allTests = [
-    ("testCount", testCount),
-    ("testIndexedSubscript", testIndexedSubscript),
-    ("testKeyedSubscript", testKeyedSubscript),
-    ("testIsNil", testIsNil),
-    ("testIntValue", testIntValue),
-    ("testInt8Value", testInt8Value),
-    ("testInt16Value", testInt16Value),
-    ("testIn32Value", testInt32Value),
-    ("testInt64Value", testInt64Value),
-    ("testUIntValue", testUIntValue),
-    ("testUInt8Value", testUInt8Value),
-    ("testUInt16Value", testUInt16Value),
-    ("testUInt32Value", testUInt32Value),
-    ("testUInt64Value", testUInt64Value),
-    ("testArrayValue", testArrayValue),
-    ("testBoolValue", testBoolValue),
-    ("testFloatValue", testFloatValue),
-    ("testDoubleValue", testDoubleValue),
-    ("testStringValue", testStringValue),
-    ("testStringValueWithCompatibility", testStringValueWithCompatibility),
-    ("testDataValue", testDataValue),
-    ("testExtendedValue", testExtendedValue),
-    ("testExtendedType", testExtendedType),
-    ("testMapValue    ", testMapValue),
-  ]
-
   func testCount() {
     XCTAssert(MessagePackValue.array([0]).count == 1)
     XCTAssert(MessagePackValue.map(["c": "cookie"]).count == 1)

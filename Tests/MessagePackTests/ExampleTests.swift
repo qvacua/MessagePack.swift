@@ -3,13 +3,6 @@ import Foundation
 import XCTest
 
 class ExampleTests: XCTestCase {
-  static var allTests = [
-    ("testPack", testPack),
-    ("testUnpack", testUnpack),
-    ("testUnpackInvalidData", testUnpackInvalidData),
-    ("testUnpackInsufficientData", testUnpackInsufficientData),
-  ]
-
   let example: MessagePackValue = ["compact": true, "schema": 0]
 
   // Two possible "correct" values because dictionaries are unordered

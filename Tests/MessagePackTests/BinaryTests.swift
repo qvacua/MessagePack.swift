@@ -3,22 +3,6 @@ import Foundation
 import XCTest
 
 class BinaryTests: XCTestCase {
-  static var allTests = [
-    ("testPack", testPack),
-    ("testUnpack", testUnpack),
-    ("testPackBin16", testPackBin16),
-    ("testUnpackBin16", testUnpackBin16),
-    ("testPackBin32", testPackBin32),
-    ("testUnpackBin32", testUnpackBin32),
-    ("testPackBin64", testPackBin64),
-    ("testUnpackBin64", testUnpackBin64),
-    ("testUnpackInsufficientData", testUnpackInsufficientData),
-    ("testUnpackFixstrWithCompatibility", testUnpackFixstrWithCompatibility),
-    ("testUnpackStr8WithCompatibility", testUnpackStr8WithCompatibility),
-    ("testUnpackStr16WithCompatibility", testUnpackStr16WithCompatibility),
-    ("testUnpackStr32WithCompatibility", testUnpackStr32WithCompatibility),
-  ]
-
   let payload = Data([0x00, 0x01, 0x02, 0x03, 0x04])
   let packed = Data([0xC4, 0x05, 0x00, 0x01, 0x02, 0x03, 0x04])
 

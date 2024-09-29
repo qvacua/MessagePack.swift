@@ -3,19 +3,6 @@ import Foundation
 import XCTest
 
 class StringTests: XCTestCase {
-  static var allTests = [
-    ("testLiteralConversion", testLiteralConversion),
-    ("testPackFixstr", testPackFixstr),
-    ("testUnpackFixstr", testUnpackFixstr),
-    ("testUnpackFixstrEmpty", testUnpackFixstrEmpty),
-    ("testPackStr8", testPackStr8),
-    ("testUnpackStr8", testUnpackStr8),
-    ("testPackStr16", testPackStr16),
-    ("testUnpackStr16", testUnpackStr16),
-    ("testPackStr32", testPackStr32),
-    ("testUnpackStr32", testUnpackStr32),
-  ]
-
   func testLiteralConversion() {
     var implicitValue: MessagePackValue
 

@@ -3,20 +3,6 @@ import Foundation
 import XCTest
 
 class DescriptionTests: XCTestCase {
-  static var allTests = [
-    ("testNilDescription", testNilDescription),
-    ("testBoolDescription", testBoolDescription),
-    ("testIntDescription", testIntDescription),
-    ("testUIntDescription", testUIntDescription),
-    ("testFloatDescription", testFloatDescription),
-    ("testDoubleDescription", testDoubleDescription),
-    ("testStringDescription", testStringDescription),
-    ("testBinaryDescription", testBinaryDescription),
-    ("testArrayDescription", testArrayDescription),
-    ("testMapDescription", testMapDescription),
-    ("testExtendedDescription", testExtendedDescription),
-  ]
-
   func testNilDescription() {
     XCTAssertEqual(MessagePackValue.nil.description, "nil")
   }

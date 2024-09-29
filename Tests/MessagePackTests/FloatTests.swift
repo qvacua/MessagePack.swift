@@ -3,11 +3,6 @@ import Foundation
 import XCTest
 
 class FloatTests: XCTestCase {
-  static var allTests = [
-    ("testPack", testPack),
-    ("testUnpack", testUnpack),
-  ]
-
   let packed = Data([0xCA, 0x40, 0x48, 0xF5, 0xC3])
 
   func testPack() {

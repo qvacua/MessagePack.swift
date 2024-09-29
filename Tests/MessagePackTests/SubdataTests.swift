@@ -3,15 +3,6 @@ import Foundation
 import XCTest
 
 class SubdataTests: XCTestCase {
-  static var allTests = [
-    ("testConversationToSubdata", testConversationToSubdata),
-    (
-      "testConversationToSubdataWithExplicityIndexes",
-      testConversationToSubdataWithExplicityIndexes
-    ),
-    ("testConversationToEmptySubdata", testConversationToEmptySubdata),
-  ]
-
   func testConversationToSubdata() {
     let data = Data(repeating: 0, count: 0x20)
     let subdata = Subdata(data: data)

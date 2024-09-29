@@ -3,12 +3,6 @@ import Foundation
 import XCTest
 
 class FalseTests: XCTestCase {
-  static var allTests = [
-    ("testLiteralConversion", testLiteralConversion),
-    ("testPack", testPack),
-    ("testUnpack", testUnpack),
-  ]
-
   let packed = Data([0xC2])
 
   func testLiteralConversion() {

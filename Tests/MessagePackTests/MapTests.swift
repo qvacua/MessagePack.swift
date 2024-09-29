@@ -49,14 +49,6 @@ func testPackMap(_ count: Int, prefix: Data) {
 }
 
 class MapTests: XCTestCase {
-  static var allTests = [
-    ("testLiteralConversion", testLiteralConversion),
-    ("testPackFixmap", testPackFixmap),
-    ("testUnpackFixmap", testUnpackFixmap),
-    ("testPackMap16", testPackMap16),
-    ("testUnpackMap16", testUnpackMap16),
-  ]
-
   func testLiteralConversion() {
     let implicitValue: MessagePackValue = ["c": "cookie"]
     XCTAssertEqual(implicitValue, MessagePackValue.map([.string("c"): .string("cookie")]))

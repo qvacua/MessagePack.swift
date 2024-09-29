@@ -3,12 +3,6 @@ import Foundation
 import XCTest
 
 class NilTests: XCTestCase {
-  static var allTests = [
-    ("testLiteralConversion", testLiteralConversion),
-    ("testPack", testPack),
-    ("testUnpack", testUnpack),
-  ]
-
   let packed = Data([0xC0])
 
   func testLiteralConversion() {
