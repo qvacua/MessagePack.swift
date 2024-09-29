@@ -1,6 +1,5 @@
 import Foundation
 @testable import MessagePack
-import XCTest
 import Testing
 
 struct ArrayTests {
