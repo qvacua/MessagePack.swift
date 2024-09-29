@@ -98,8 +98,8 @@ struct StringTests {
   @Test func testPackStr32() {
     let string = String(repeating: "*", count: 0x10000)
     #expect(
-      pack(.string(string)) == 
-      Data([0xDB, 0x00, 0x01, 0x00, 0x00]) + string.data(using: .utf8)!
+      pack(.string(string)) ==
+        Data([0xDB, 0x00, 0x01, 0x00, 0x00]) + string.data(using: .utf8)!
     )
   }
 

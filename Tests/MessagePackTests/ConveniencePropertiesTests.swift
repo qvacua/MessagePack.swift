@@ -1,7 +1,7 @@
 import Foundation
 @testable import MessagePack
-import Testing
 import Numerics
+import Testing
 
 struct ConveniencePropertiesTests {
   @Test func testCount() {

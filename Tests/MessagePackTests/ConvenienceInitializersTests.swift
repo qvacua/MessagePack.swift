@@ -19,7 +19,7 @@ struct ConvenienceInitializersTests {
     #expect(MessagePackValue(0xFFFF_FFFF as UInt32) == MessagePackValue.uint(0xFFFF_FFFF))
     #expect(
       MessagePackValue(0xFFFF_FFFF_FFFF_FFFF as UInt64) ==
-      MessagePackValue.uint(0xFFFF_FFFF_FFFF_FFFF)
+        MessagePackValue.uint(0xFFFF_FFFF_FFFF_FFFF)
     )
   }
 
@@ -30,7 +30,7 @@ struct ConvenienceInitializersTests {
     #expect(MessagePackValue(-0x7FFF_FFFF as Int32) == MessagePackValue.int(-0x7FFF_FFFF))
     #expect(
       MessagePackValue(-0x7FFF_FFFF_FFFF_FFFF as Int64) ==
-      MessagePackValue.int(-0x7FFF_FFFF_FFFF_FFFF)
+        MessagePackValue.int(-0x7FFF_FFFF_FFFF_FFFF)
     )
   }
 
@@ -53,14 +53,14 @@ struct ConvenienceInitializersTests {
   @Test func testArray() {
     #expect(
       MessagePackValue([.uint(0), .uint(1), .uint(2), .uint(3), .uint(4)]) ==
-      MessagePackValue.array([.uint(0), .uint(1), .uint(2), .uint(3), .uint(4)])
+        MessagePackValue.array([.uint(0), .uint(1), .uint(2), .uint(3), .uint(4)])
     )
   }
 
   @Test func testMap() {
     #expect(
       MessagePackValue([.string("c"): .string("cookie")]) ==
-      MessagePackValue.map([.string("c"): .string("cookie")])
+        MessagePackValue.map([.string("c"): .string("cookie")])
     )
   }
 
@@ -74,7 +74,7 @@ struct ConvenienceInitializersTests {
     let data = Data([0x00, 0x01, 0x02, 0x03, 0x04])
     #expect(
       MessagePackValue(type: type, data: data) ==
-      MessagePackValue.extended(type, data)
+        MessagePackValue.extended(type, data)
     )
   }
 }

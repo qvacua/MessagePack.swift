@@ -40,7 +40,7 @@ struct DescriptionTests {
     #expect(MessagePackValue.string("").description == "string()".description)
     #expect(
       MessagePackValue.string("MessagePack").description ==
-      "string(MessagePack)".description
+        "string(MessagePack)".description
     )
   }
 
@@ -48,7 +48,7 @@ struct DescriptionTests {
     #expect(MessagePackValue.binary(Data()).description == "data(0 bytes)")
     #expect(
       MessagePackValue.binary(Data(Data([0x00, 0x01, 0x02, 0x03, 0x04]))).description ==
-      "data(5 bytes)"
+        "data(5 bytes)"
     )
   }
 
@@ -56,7 +56,7 @@ struct DescriptionTests {
     let values: [MessagePackValue] = [1, true, ""]
     #expect(
       MessagePackValue.array(values).description ==
-      "array([int(1), bool(true), string()])"
+        "array([int(1), bool(true), string()])"
     )
   }
 
@@ -101,7 +101,7 @@ struct DescriptionTests {
     #expect(MessagePackValue.extended(5, Data()).description == "extended(5, 0 bytes)")
     #expect(
       MessagePackValue.extended(5, Data([0x00, 0x10, 0x20, 0x30, 0x40])).description ==
-      "extended(5, 5 bytes)"
+        "extended(5, 5 bytes)"
     )
   }
 }

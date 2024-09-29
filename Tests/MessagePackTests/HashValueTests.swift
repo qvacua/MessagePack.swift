@@ -63,11 +63,11 @@ struct HashValueTests {
   @Test func testExtendedHashValue() {
     #expect(
       MessagePackValue.extended(5, Data()).hashValue ==
-      31 &* Int8(5).hashValue &+ Int(0)
+        31 &* Int8(5).hashValue &+ Int(0)
     )
     #expect(
       MessagePackValue.extended(5, Data([0x00, 0x01, 0x02, 0x03, 0x04])).hashValue ==
-      31 &* Int8(5).hashValue &+ Int(5)
+        31 &* Int8(5).hashValue &+ Int(5)
     )
   }
 }
