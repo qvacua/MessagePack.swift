@@ -2,7 +2,7 @@ MessagePack.swift
 =================
 
 A fast, zero-dependency MessagePack implementation written in Swift 4. Supports Apple platforms and Linux.
-It's a fork of `a2/MessagePack.swift`.
+This is a fork of `https://github.com/a2/MessagePack.swift` (it looks like that repository is inactive for long time).
 
 ## Version
 
