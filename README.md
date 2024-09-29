@@ -1,55 +1,20 @@
 MessagePack.swift
 =================
 
-[![Version](https://img.shields.io/cocoapods/v/MessagePack.swift.svg?style=flat)](http://cocoapods.org/pods/MessagePack.swift)
-[![License](https://img.shields.io/cocoapods/l/MessagePack.swift.svg?style=flat)](http://cocoapods.org/pods/MessagePack.swift)
-[![Platform](https://img.shields.io/cocoapods/p/MessagePack.swift.svg?style=flat)](http://cocoapods.org/pods/MessagePack.swift)
-
 A fast, zero-dependency MessagePack implementation written in Swift 4. Supports Apple platforms and Linux.
-
-## Installation
-
-### CocoaPods
-
-To use CocoaPods, add the following to your Podfile:
-
-```ruby
-pod 'MessagePack.swift', '~> 4.0'
-```
-
-### Carthage
-
-To use Carthage, add the following to your Cartfile:
-
-```ogdl
-github "a2/MessagePack.swift" ~> 4.0
-```
-
-### SPM (Swift Package Manager)
-
-You can easily integrate MessagePack.swift in your app with SPM. Just add MessagePack.swift as a dependency:
-
-```swift
-import PackageDescription
-
-let package = Package(
-    name: "MyAwesomeApp",
-    dependencies: [
-        .Package(url: "https://github.com/a2/MessagePack.swift.git", majorVersion: 4),
-    ]
-)
-```
+It's a fork of `a2/MessagePack.swift`.
 
 ## Version
 
-- Versions 4.x support Swift 5.2.
+- Version 4.1 support Swift 6 and the `MessagePackValue` is a `Sendable`.
+- Versions 4.0 support Swift 5.2.
 - Versions 3.x support Swift 4.
 - Support for Swift 3 was dropped after [2.1.1](https://github.com/a2/MessagePack.swift/releases/tag/2.1.1).
 - Support for Swift 2 was dropped after [1.2.0](https://github.com/a2/MessagePack.swift/releases/tag/1.2.0).
 
 ## Authors
 
-Alexsander Akers, me@a2.io
+Alexsander Akers, me@a2.io and others.
 
 ## License
 
