@@ -6,7 +6,11 @@ public struct Subdata: RandomAccessCollection {
   let baseEndIndex: Int
 
   public init(data: Data, startIndex: Int = 0) {
-    self.init(data: data, startIndex: startIndex, endIndex: data.endIndex)
+    self.init(
+      data: data,
+      startIndex: data.startIndex + startIndex,
+      endIndex: data.endIndex
+    )
   }
 
   public init(data: Data, startIndex: Int, endIndex: Int) {
@@ -53,6 +57,6 @@ public struct Subdata: RandomAccessCollection {
   }
 
   public var data: Data {
-    self.base.subdata(in: self.baseStartIndex..<self.baseEndIndex)
+    self.base[self.baseStartIndex..<self.baseEndIndex]
   }
 }
