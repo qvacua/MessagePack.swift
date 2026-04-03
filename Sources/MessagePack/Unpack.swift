@@ -75,6 +75,8 @@ func unpackArray(
   compatibility: Bool
 ) throws -> (value: [MessagePackValue], remainder: Subdata) {
   var values = [MessagePackValue]()
+  values.reserveCapacity(count)
+
   var remainder = data
   var newValue: MessagePackValue
 
@@ -99,16 +101,14 @@ func unpackMap(
   compatibility: Bool
 ) throws -> (value: [MessagePackValue: MessagePackValue], remainder: Subdata) {
   var dict = [MessagePackValue: MessagePackValue](minimumCapacity: count)
-  var lastKey: MessagePackValue?
+  var remainder = data
 
-  let (array, remainder) = try unpackArray(data, count: 2 * count, compatibility: compatibility)
-  for item in array {
-    if let key = lastKey {
-      dict[key] = item
-      lastKey = nil
-    } else {
-      lastKey = item
-    }
+  for _ in 0..<count {
+    let key: MessagePackValue
+    let value: MessagePackValue
+    (key, remainder) = try unpack(remainder, compatibility: compatibility)
+    (value, remainder) = try unpack(remainder, compatibility: compatibility)
+    dict[key] = value
   }
 
   return (dict, remainder)
