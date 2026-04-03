@@ -25,7 +25,7 @@ func testPackMap(_ count: Int, prefix: Data) {
 
   #expect(packed.subdata(in: 0..<prefix.count) == prefix)
 
-  var remainder = Subdata(data: packed, startIndex: prefix.count, endIndex: packed.count)
+  var remainder = packed[prefix.count..<packed.count]
   var keys = Set<Int>()
   do {
     for _ in 0..<count {
